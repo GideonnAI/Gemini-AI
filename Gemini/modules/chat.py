@@ -1,14 +1,26 @@
+import requests, json
 from telethon import events
-import google.generativeai as genai
-from Gemini import bot, GEMINI_API_KEY
+from Gemini import bot
+from Gemini import GEMINI_API_KEY as api_key
 
-model = genai.GenerativeModel('gemini-1.5-flash')
-genai.configure(api_key=GEMINI_API_KEY)
+async def ask_gemini(prompt, api_key):
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    
+    data = {
+        "contents": [{
+            "parts": [{"text": prompt}]
+        }]
+    }
+    
+    response = requests.post(url, json=data)
+    result = response.json()
+    
+    try:
+        return result['candidates'][0]['content']['parts'][0]['text']
+    except:
+        return "Maaf, terjadi error saat memproses permintaan."
 
 async def group_message(event, message_text):
-    chat = await event.get_chat()
-    message_txt = event.message.text
-    response = model.generate_content(message)
     bot_username = (await bot.get_me()).username
     
     if bot_username and f"@{bot_username}" in message_text:
@@ -21,16 +33,14 @@ async def group_message(event, message_text):
             return False
         
         else:
-            await event.reply(response.text)
+            user_message = event.message.text
+            response = ask_gemini(user_message)
+            await event.reply(response)
             return True
     
     return False
 
 async def private_message(event, message_text):
-    chat = await event.get_chat()
-    message_txt = event.message.text
-    response = model.generate_content(message)
-  
     if message_text in ['?start', '!start', '/start']:
         return False
     
@@ -38,7 +48,9 @@ async def private_message(event, message_text):
         return False
     
     else:
-        await event.respond(response.text)
+        user_message = event.message.text
+        response = ask_gemini(user_message)
+        await event.respond(response)
         return True
 
 @bot.on(events.NewMessage)
