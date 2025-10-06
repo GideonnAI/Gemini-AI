@@ -1,4 +1,4 @@
 telethon==1.24.0
 requests
-google-generativeai
+json
 pytz
