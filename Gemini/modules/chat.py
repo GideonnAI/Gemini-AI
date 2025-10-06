@@ -55,7 +55,7 @@ async def private_message(event, message_text):
 
 @bot.on(events.NewMessage)
 async def chat(event):
-    if event.sender_id == (await client.get_me()).id:
+    if event.sender_id == (await bot.get_me()).id:
         return
     
     chat = await event.get_chat()
