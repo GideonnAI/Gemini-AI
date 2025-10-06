@@ -8,6 +8,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN", None)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", None)
 
 bot = TelegramClient(
         "tgbot",
