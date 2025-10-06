@@ -1,13 +1,21 @@
 from telethon import events, Button
 from Gemini import bot
 
+bot_username = (await bot.get_me()).username
+HELP_TEXT = f"""
+Di Grup: Tag saya lalu ketik apa saja untuk memulai percakapan
+Contoh: @{bot_username} Apa itu AI?
+
+Chat Pribadi: Silahkan ketik apa saja untuk memulai percakapan!
+"""
+
 @bot.on(events.NewMessage(pattern="[!?/]help ?(.*)"))
 async def help(event):
     if event.is_group:
-       await event.reply("Tag saya lalu ketik apa saja untuk memulai percakapan")
+       await event.reply(HELP_TEXT)
        return
 
-    await event.respond("Silahkan ketik apa saja untuk memulai percakapan!", buttons=(Button.inline("Kembali", data="home")))
+    await event.respond(HELP_TEXT, buttons=(Button.inline("Kembali", data="home")))
 
 
 @bot.on(events.callbackquery.CallbackQuery(data="help"))
