@@ -28,9 +28,11 @@ async def start(event):
        return
 
     if event.is_group:
-        await event.reply("**Halo! Ada yang bisa saya bantu hari ini?**",
+       await event.reply("**Halo! Ada yang bisa saya bantu hari ini?**",
         buttons=
-        [[Button.url("Website", "https://gemini.google.com")]]
+        [
+            Button.url("Website", "https://gemini.google.com")
+        ]
        )
        return
 
