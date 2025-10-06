@@ -7,7 +7,7 @@ async def help(event):
        await event.reply("Tag saya lalu ketik apa saja untuk memulai percakapan")
        return
 
-    await event.reply("Silahkan ketik apa saja untuk memulai percakapan!", buttons=(Button.inline("Kembali", data="home")))
+    await event.respond("Silahkan ketik apa saja untuk memulai percakapan!", buttons=(Button.inline("Kembali", data="home")))
 
 
 @bot.on(events.callbackquery.CallbackQuery(data="help"))
