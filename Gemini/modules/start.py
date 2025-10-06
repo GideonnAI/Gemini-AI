@@ -41,6 +41,7 @@ async def selamat():
 
 @bot.on(events.NewMessage(pattern="^[?!/]start ?(.*)"))
 async def start(event):
+    salam = await selamat()
 
     if event.is_private:
        await event.respond(selamat() + START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN
@@ -48,7 +49,7 @@ async def start(event):
        return
 
     if event.is_group:
-       await event.reply(selamat() + " Ada yang bisa saya bantu hari ini?",
+       await event.reply(salam + " Ada yang bisa saya bantu hari ini?",
         buttons=
         [
             Button.url("Website", "https://gemini.google.com")
@@ -59,4 +60,5 @@ async def start(event):
 
 @bot.on(events.callbackquery.CallbackQuery(data="home"))
 async def hstart(event):
-     await event.edit(selamat() + START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN)
+     salam = await selamat()
+     await event.edit(salam + START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN)
