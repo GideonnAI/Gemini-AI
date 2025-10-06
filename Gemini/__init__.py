@@ -4,8 +4,8 @@ from telethon import TelegramClient
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.INFO)
 
-TOKEN = os.environ.get("TOKEN", None)
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", None)
+TOKEN = os.get.env("TOKEN", None)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", None)
 
 bot = TelegramClient(
         "tgbot",
