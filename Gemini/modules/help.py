@@ -1,6 +1,5 @@
 from telethon import events, Button
 from Gemini import bot
-from Gemini.modules import *
 
 @bot.on(events.NewMessage(pattern="[!?/]help ?(.*)"))
 async def help(event):
