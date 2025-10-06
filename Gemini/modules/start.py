@@ -4,8 +4,7 @@ from Gemini import bot
 from telethon import events, Button
 
 
-START_TEXT = """
-** [{}](tg://user?id={})!**
+START_TEXT = """**[{}](tg://user?id={})!**
 
 **I'm Gemini AI Chatbot.**
 
@@ -26,17 +25,17 @@ async def selamat():
     jam = int(wib_time.strftime('%H'))
     
     if 0 <= jam < 5:
-        return f"Selamat dini hari!"
+        return f"**Selamat dini hari,** "
     elif 5 <= jam < 12:
-        return f"Selamat pagi!"
+        return f"**Selamat pagi,** "
     elif 12 <= jam < 15:
-        return f"Selamat siang!️"
+        return f"**Selamat siang,** "
     elif 15 <= jam < 19:
-        return f"Selamat sore!"
+        return f"**Selamat sore,** "
     elif 19 <= jam < 24:
-        return f"Selamat malam!"
+        return f"**Selamat malam,** "
     else:
-        return "Selamat datang!"
+        return "**Selamat datang,** "
         
 
 @bot.on(events.NewMessage(pattern="^[?!/]start ?(.*)"))
