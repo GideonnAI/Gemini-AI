@@ -1,4 +1,4 @@
-from DionRobot import bot
+from Gemini import bot
 from telethon import events, Button
 
 
