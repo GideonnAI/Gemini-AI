@@ -1,4 +1,5 @@
 from Gemini import bot
+from Gemini.modules import *
 from telethon import events, Button
 
 
