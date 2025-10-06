@@ -11,13 +11,17 @@ async def ask_gemini(prompt, api_key):
         }]
     }
     
-    response = requests.post(url, json=data)
-    result = response.json()
-    
     try:
-        return result['candidates'][0]['content']['parts'][0]['text']
-    except:
-        return "Maaf, terjadi error saat memproses permintaan."
+        response = requests.post(url, json=data)
+        result = response.json()
+        
+        if 'candidates' in result and result['candidates']:
+            return result['candidates'][0]['content']['parts'][0]['text']
+        else:
+            return "❌ Maaf, tidak ada response dari Gemini AI"
+            
+    except Exception as e:
+        return f"❌ Error: {str(e)}"
 
 async def group_message(event, message_text):
     bot_username = (await bot.get_me()).username
@@ -33,7 +37,7 @@ async def group_message(event, message_text):
         
         else:
             user_message = event.message.text
-            response = ask_gemini(user_message, GEMINI_API_KEY)
+            response = await ask_gemini(user_message, GEMINI_API_KEY)
             await event.reply(response)
             return True
     
@@ -48,7 +52,7 @@ async def private_message(event, message_text):
     
     else:
         user_message = event.message.text
-        response = ask_gemini(user_message, GEMINI_API_KEY)
+        response = await ask_gemini(user_message, GEMINI_API_KEY)
         await event.respond(response)
         return True
 
