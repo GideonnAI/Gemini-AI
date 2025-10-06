@@ -1,5 +1,4 @@
 from Gemini import bot
-from Gemini.modules import *
 from telethon import events, Button
 
 
@@ -14,7 +13,7 @@ START_TEXT = """
 
 START_BTN = [
                 [
-                    Button.url("Bantuan", data="help"),
+                    Button.inline("Bantuan", data="help"),
                     Button.url("Situs", "https://gemini.google.com/?hl=id")
                 ]
             ]
