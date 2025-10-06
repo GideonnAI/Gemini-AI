@@ -1,8 +1,11 @@
 import os, logging
+from dotenv import load_dotenv
 from telethon import TelegramClient
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.INFO)
+
+load_dotenv()
 
 TOKEN = os.get.env("TOKEN", None)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", None)
