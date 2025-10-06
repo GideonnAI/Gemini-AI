@@ -23,7 +23,7 @@ START_BTN = [
 async def start(event):
 
     if event.is_private:
-       await event.reply(START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN
+       await event.respond(START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN
        )
        return
 
