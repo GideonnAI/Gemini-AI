@@ -14,9 +14,9 @@ async def help(event):
        await event.reply(HELP_TEXT.format(bot.get_me().username))
        return
 
-    await event.respond(HELP_TEXT.format(bot.get_me().username)), buttons=(Button.inline("Kembali", data="home"))
+    await event.respond(HELP_TEXT.format(bot.get_me().username)), buttons=[(Button.inline("Kembali", data="home"))]
 
 
 @bot.on(events.callbackquery.CallbackQuery(data="help"))
 async def chelp(event):
-     await event.edit(HELP_TEXT.format(bot.get_me().username)), buttons=(Button.inline("Kembali", data="home"))
+     await event.edit(HELP_TEXT.format(bot.get_me().username)), buttons=[(Button.inline("Kembali", data="home"))]
