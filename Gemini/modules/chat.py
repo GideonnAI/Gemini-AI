@@ -1,10 +1,9 @@
 import requests, json
 from telethon import events
-from Gemini import bot
-from Gemini import GEMINI_API_KEY as api_key
+from Gemini import *
 
 async def ask_gemini(prompt, api_key):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
     
     data = {
         "contents": [{
