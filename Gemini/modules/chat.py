@@ -33,7 +33,7 @@ async def group_message(event, message_text):
         
         else:
             user_message = event.message.text
-            response = ask_gemini(user_message)
+            response = ask_gemini(user_message, GEMINI_API_KEY)
             await event.reply(response)
             return True
     
@@ -48,7 +48,7 @@ async def private_message(event, message_text):
     
     else:
         user_message = event.message.text
-        response = ask_gemini(user_message)
+        response = ask_gemini(user_message, GEMINI_API_KEY)
         await event.respond(response)
         return True
 
