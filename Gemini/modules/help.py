@@ -1,7 +1,7 @@
 from telethon import events, Button
 from Gemini import bot
 
-bot_username = (await bot.get_me()).username
+bot_username = bot.get_me().username
 HELP_TEXT = f"""
 Di Grup: Tag saya lalu ketik apa saja untuk memulai percakapan
 Contoh: @{bot_username} Apa itu AI?
