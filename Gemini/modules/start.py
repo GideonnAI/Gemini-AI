@@ -1,9 +1,11 @@
+import pytz
+from datetime import datetime
 from Gemini import bot
 from telethon import events, Button
 
 
 START_TEXT = """
-**Hi [{}](tg://user?id={})!**
+** [{}](tg://user?id={})!**
 
 **I'm Gemini AI Chatbot.**
 
@@ -18,17 +20,35 @@ START_BTN = [
                 ]
             ]
 
+async def selamat():
+    wib_tz = pytz.timezone('Asia/Jakarta')
+    wib_time = datetime.now(wib_tz)
+    jam = int(wib_time.strftime('%H'))
+    
+    if 0 <= jam < 5:
+        return f"Selamat dini hari!"
+    elif 5 <= jam < 12:
+        return f"Selamat pagi!"
+    elif 12 <= jam < 15:
+        return f"Selamat siang!️"
+    elif 15 <= jam < 19:
+        return f"Selamat sore!"
+    elif 19 <= jam < 24:
+        return f"Selamat malam!"
+    else:
+        return "Selamat datang!"
+        
 
 @bot.on(events.NewMessage(pattern="^[?!/]start ?(.*)"))
 async def start(event):
 
     if event.is_private:
-       await event.respond(START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN
+       await event.respond(selamat() + START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN
        )
        return
 
     if event.is_group:
-       await event.reply("**Halo! Ada yang bisa saya bantu hari ini?**",
+       await event.reply(selamat() + " Ada yang bisa saya bantu hari ini?",
         buttons=
         [
             Button.url("Website", "https://gemini.google.com")
@@ -39,4 +59,4 @@ async def start(event):
 
 @bot.on(events.callbackquery.CallbackQuery(data="home"))
 async def hstart(event):
-     await event.edit(START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN)
+     await event.edit(selamat() + START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN)
