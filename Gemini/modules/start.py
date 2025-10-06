@@ -44,7 +44,7 @@ async def start(event):
     salam = await selamat()
 
     if event.is_private:
-       await event.respond(selamat() + START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN
+       await event.respond(salam + START_TEXT.format(event.sender.first_name, event.sender_id), buttons=START_BTN
        )
        return
 
